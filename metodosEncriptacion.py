@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+from AlgExtEuc import extended_euclidean_algorithm
 print("----------MENU----------")
 print("1.Método Cesar")
 print("2.Método Vigenere")
@@ -139,9 +140,65 @@ elif metodo == "Método Simetrico":
 # ============================================================================================================
 
 elif metodo == "Método Afin":
-    print("Método en proceso")
 
-# ============================================================================================================
+    alfabeto = 'abcdefghijklmnñopqrstuvwxyz '
+    m = len(alfabeto)
+
+
+    def encriptar(texto, a, b):
+        encriptado = ''
+        for letra in texto.lower():
+            if letra in alfabeto:
+                x = alfabeto.index(letra)
+                y = (a * x + b) % m
+                encriptado += alfabeto[y]
+            else:
+                encriptado += letra
+        return encriptado
+
+
+    def desencriptar(texto, a, b):
+        desencriptado = ''
+        for letra in texto.lower():
+            if letra in alfabeto:
+                y = alfabeto.index(letra)
+                inv_a = extended_euclidean_algorithm(a, m)
+                x = (inv_a * (y - b)) % m
+                desencriptado += alfabeto[x]
+            else:
+                desencriptado += letra
+        return desencriptado
+
+
+    def main():
+        print("-----Opciones-----")
+        print("1.cifrar mensaje")
+        print("2.descifrar mensaje")
+        opcion = input("Escriba la opcion que desee: ")
+        if opcion == "cifrar mensaje":
+            texto = input("cadena a cifrar: ")
+            ingreso_a = input("Ingresa la constante de multiplicación: ")
+            a = int(ingreso_a)
+            ingreso_b = input("Ingresa la constante de desplazamiento: ")
+            b = int(ingreso_b)
+            encriptar_texto = encriptar(texto, a, b)
+            print(encriptar_texto)
+        elif opcion == "descifrar mensaje":
+            texto = input("cadena a descifrar: ")
+            ingreso_a = input("Ingresa la constante de multiplicación: ")
+            a = int(ingreso_a)
+            ingreso_b = input("Ingresa la constante de desplazamiento: ")
+            b = int(ingreso_b)
+            desencriptar_texto = desencriptar(texto, a, b)
+            print(desencriptar_texto)
+
+        else:
+            print("Opcion no reconocida / no digitada correctamente")
+
+
+    if __name__ == "__main__":
+        main()
+
 
 else:
     print("metodo no reconocido / digitado incorrectamente")
