@@ -3,9 +3,8 @@ print("----------MENU----------")
 print("1.Método Cesar")
 print("2.Método Vigenere")
 print("3.Método Simetrico")
-print("4.Método Bacon")
-print(
-    "Se le solicita escrbir el método de cifrado tal como esta en el menú, caso contrario el programa no lo reconocera")
+print("4.Método Afin")
+print("Se le solicita escrbir el método de cifrado tal como esta en el menú, caso contrario el programa no lo reconocera")
 metodo = input("Elige el método a utilizar: ")
 
 # ============================================================================================================
@@ -139,8 +138,8 @@ elif metodo == "Método Simetrico":
 
 # ============================================================================================================
 
-elif metodo == "Método Bacon":
-    print("metodo en proceso")
+elif metodo == "Método Afin":
+    print("Método en proceso")
 
 # ============================================================================================================
 
